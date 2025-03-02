@@ -1,0 +1,48 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesture Control</title>
+    
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        h1 { color: #333; }
+        #status { font-size: 18px; font-weight: bold; margin: 20px 0; }
+        .button { background-color: #28a745; color: white; padding: 15px 25px; font-size: 18px; border: none; cursor: pointer; margin: 10px; border-radius: 5px; }
+        .stop-btn { background-color: #dc3545; }
+    </style>
+
+    <script>
+        function startGesture() {
+            console.log("Start button clicked");  // Debugging
+            fetch('/start', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Response:", data);  // Debugging
+                    document.getElementById("status").innerText = data.status;
+                })
+                .catch(error => console.error("Error:", error));
+        }
+
+        function stopGesture() {
+            console.log("Stop button clicked");  // Debugging
+            fetch('/stop', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Response:", data);  // Debugging
+                    document.getElementById("status").innerText = data.status;
+                })
+                .catch(error => console.error("Error:", error));
+        }
+    </script>
+</head>
+<body>
+    <h1>Gesture Control for Gaming 🎮</h1>
+    <p id="status">System is idle...</p>
+
+    <button class="button" onclick="startGesture()">▶ Start Gesture Control</button>
+    <button class="button stop-btn" onclick="stopGesture()">⏹ Stop Gesture Control</button>
+</body>
+</html>
+
